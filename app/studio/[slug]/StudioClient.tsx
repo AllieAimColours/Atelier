@@ -6,7 +6,10 @@ import type { DeckBundle, SlideRecord } from "@/lib/types";
 import { createBrowserSupabase } from "@/lib/supabase-browser";
 import SlidePreview from "@/components/studio/SlidePreview";
 import SlideEditor from "@/components/studio/SlideEditor";
+import ChatPanel from "@/components/studio/ChatPanel";
 import "../studio.css";
+
+type Mode = "edit" | "chat";
 
 export default function StudioClient({
   bundle,
@@ -18,6 +21,7 @@ export default function StudioClient({
   const router = useRouter();
   const [slides, setSlides] = useState(bundle.slides);
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [mode, setMode] = useState<Mode>("edit");
   const current = slides[currentIdx];
 
   function onSlideUpdated(updated: SlideRecord) {
@@ -90,10 +94,27 @@ export default function StudioClient({
           </div>
         </div>
 
-        {/* ─── edit panel ─── */}
+        {/* ─── edit / chat panel ─── */}
         <aside className="studio__edit">
-          {current && (
+          <div className="studio__tabs">
+            <button
+              className={`studio__tab${mode === "edit" ? " active" : ""}`}
+              onClick={() => setMode("edit")}
+            >
+              Edit
+            </button>
+            <button
+              className={`studio__tab${mode === "chat" ? " active" : ""}`}
+              onClick={() => setMode("chat")}
+            >
+              Co-pilot
+            </button>
+          </div>
+          {current && mode === "edit" && (
             <SlideEditor slide={current} onUpdated={onSlideUpdated} />
+          )}
+          {current && mode === "chat" && (
+            <ChatPanel slide={current} onUpdated={onSlideUpdated} />
           )}
         </aside>
       </div>

@@ -89,7 +89,7 @@ function Cover({ content }: { content: CoverContent }) {
 // ─── S2 · PROBLEM ─────────────────────────────────────────────────────────
 function Problem({ content }: { content: ProblemContent }) {
   return (
-    <div className="body" style={{ gap: "2.4vh" }}>
+    <div className="body" style={{ gap: "2.4cqh" }}>
       <div>
         <p className="label">{content.label}</p>
         <div className="rule" />
@@ -102,7 +102,7 @@ function Problem({ content }: { content: ProblemContent }) {
 
       <div className="rule-full" />
 
-      <div className="g2" style={{ gap: "5vw", alignItems: "end" }}>
+      <div className="g2" style={{ gap: "5cqw", alignItems: "end" }}>
         {content.two_columns.map((col, i) => (
           <div key={i}>
             <p className="label" style={{ marginBottom: ".7rem" }}>
@@ -116,7 +116,7 @@ function Problem({ content }: { content: ProblemContent }) {
       <div
         style={{
           width: "100%",
-          paddingTop: "1.6vh",
+          paddingTop: "1.6cqh",
           borderTop: "1px solid var(--gold-line)",
         }}
       >
@@ -138,15 +138,15 @@ function Vision({ content }: { content: VisionContent }) {
   return (
     <div
       className="body"
-      style={{ gap: 0, paddingTop: "2vh", overflow: "hidden" }}
+      style={{ gap: 0, paddingTop: "2cqh", overflow: "hidden" }}
     >
-      <div style={{ flexShrink: 0, paddingBottom: "1.6vh" }}>
+      <div style={{ flexShrink: 0, paddingBottom: "1.6cqh" }}>
         <p className="label">{content.label}</p>
         <div className="rule" />
         <h2
           className="serif"
           style={{
-            fontSize: "clamp(1.8rem,3.8vw,3.6rem)",
+            fontSize: "clamp(1.8rem,3.8cqw,3.6rem)",
             lineHeight: 1.1,
             color: "var(--ivory)",
           }}
@@ -162,7 +162,7 @@ function Vision({ content }: { content: VisionContent }) {
           width: "100%",
           background: content.image.background,
           flexShrink: 0,
-          height: "34vh",
+          height: "34cqh",
           overflow: "hidden",
           borderRadius: "3px",
           position: "relative",
@@ -198,8 +198,8 @@ function Vision({ content }: { content: VisionContent }) {
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3,1fr)",
-          gap: "2.5vw",
-          paddingTop: "2vh",
+          gap: "2.5cqw",
+          paddingTop: "2cqh",
           flex: 1,
         }}
       >
@@ -214,7 +214,7 @@ function Vision({ content }: { content: VisionContent }) {
             <p
               style={{
                 fontFamily: "var(--serif)",
-                fontSize: "clamp(.95rem,1.3vw,1.2rem)",
+                fontSize: "clamp(.95rem,1.3cqw,1.2rem)",
                 fontWeight: 400,
                 color: "var(--gold)",
                 marginBottom: ".5rem",
@@ -233,7 +233,7 @@ function Vision({ content }: { content: VisionContent }) {
 // ─── S4 · TECHNOLOGY ──────────────────────────────────────────────────────
 function Technology({ content }: { content: TechnologyContent }) {
   return (
-    <div className="body" style={{ gap: "2.4vh" }}>
+    <div className="body" style={{ gap: "2.4cqh" }}>
       <div>
         <p className="label">{content.label}</p>
         <div className="rule" />
@@ -250,8 +250,8 @@ function Technology({ content }: { content: TechnologyContent }) {
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(5, 1fr)",
-          gap: "2vw",
-          paddingTop: "1vh",
+          gap: "2cqw",
+          paddingTop: "1cqh",
         }}
       >
         {content.specs.map((spec, i) => (
@@ -263,7 +263,7 @@ function Technology({ content }: { content: TechnologyContent }) {
       </div>
       <div
         style={{
-          marginTop: "1vh",
+          marginTop: "1cqh",
           border: "1px solid var(--gold-line)",
           padding: ".35rem 1rem",
           display: "inline-block",
@@ -290,7 +290,7 @@ function Technology({ content }: { content: TechnologyContent }) {
 // ─── S5 · EXPERIENCE ──────────────────────────────────────────────────────
 function Experience({ content }: { content: ExperienceContent }) {
   return (
-    <div className="body" style={{ gap: "3.5vh", justifyContent: "center" }}>
+    <div className="body" style={{ gap: "3.5cqh", justifyContent: "center" }}>
       <div>
         <p className="label">{content.label}</p>
         <div className="rule" />
@@ -300,7 +300,7 @@ function Experience({ content }: { content: ExperienceContent }) {
           <span className="gold">{content.headline_accent}</span>
         </h2>
       </div>
-      <div className="g3" style={{ alignItems: "start", gap: "3vw" }}>
+      <div className="g3" style={{ alignItems: "start", gap: "3cqw" }}>
         {content.numbered_columns.map((col, i) => (
           <div
             key={i}
@@ -341,7 +341,7 @@ function Experience({ content }: { content: ExperienceContent }) {
 // ─── S6 · REVENUE ─────────────────────────────────────────────────────────
 function Revenue({ content }: { content: RevenueContent }) {
   return (
-    <div className="body" style={{ gap: "2.4vh" }}>
+    <div className="body" style={{ gap: "2.4cqh" }}>
       <div>
         <p className="label">{content.label}</p>
         <div className="rule" />
@@ -368,7 +368,7 @@ function Revenue({ content }: { content: RevenueContent }) {
 // ─── S7 · GO-TO-MARKET ────────────────────────────────────────────────────
 function Gtm({ content }: { content: GtmContent }) {
   return (
-    <div className="body" style={{ gap: "2.4vh" }}>
+    <div className="body" style={{ gap: "2.4cqh" }}>
       <div>
         <p className="label">{content.label}</p>
         <div className="rule" />
@@ -378,7 +378,7 @@ function Gtm({ content }: { content: GtmContent }) {
           <span className="gold">{content.headline_accent}</span>
         </h2>
       </div>
-      <div className="g4" style={{ gap: "2vw" }}>
+      <div className="g4" style={{ gap: "2cqw" }}>
         {content.years.map((y, i) => (
           <div
             key={i}
@@ -398,7 +398,7 @@ function Gtm({ content }: { content: GtmContent }) {
 // ─── S8 · TRACTION ────────────────────────────────────────────────────────
 function Traction({ content }: { content: TractionContent }) {
   return (
-    <div className="body" style={{ justifyContent: "center", gap: "3vh" }}>
+    <div className="body" style={{ justifyContent: "center", gap: "3cqh" }}>
       <div>
         <p className="label">{content.label}</p>
         <div className="rule" />
@@ -406,7 +406,7 @@ function Traction({ content }: { content: TractionContent }) {
       <p
         className="serif"
         style={{
-          fontSize: "clamp(2.2rem,4.8vw,4.6rem)",
+          fontSize: "clamp(2.2rem,4.8cqw,4.6rem)",
           lineHeight: 1.12,
           color: "var(--ivory)",
           maxWidth: "78%",
@@ -427,17 +427,17 @@ function Traction({ content }: { content: TractionContent }) {
 // ─── S9 · MARKET ──────────────────────────────────────────────────────────
 function Market({ content }: { content: MarketContent }) {
   return (
-    <div className="body" style={{ gap: "2.2vh", paddingTop: "3vh" }}>
+    <div className="body" style={{ gap: "2.2cqh", paddingTop: "3cqh" }}>
       <div
         className="g2"
         style={{ gap: 0, alignItems: "stretch", flex: 1 }}
       >
         <div
           style={{
-            paddingRight: "4vw",
+            paddingRight: "4cqw",
             display: "flex",
             flexDirection: "column",
-            gap: "1.6vh",
+            gap: "1.6cqh",
           }}
         >
           <div>
@@ -469,10 +469,10 @@ function Market({ content }: { content: MarketContent }) {
         <div
           style={{
             borderLeft: "1px solid var(--gold-line)",
-            paddingLeft: "4vw",
+            paddingLeft: "4cqw",
             display: "flex",
             flexDirection: "column",
-            gap: "1.5vh",
+            gap: "1.5cqh",
           }}
         >
           <div>
@@ -480,7 +480,7 @@ function Market({ content }: { content: MarketContent }) {
             <div className="rule" />
             <h3
               className="serif d-sm"
-              style={{ marginBottom: "1.4vh", color: "var(--ivory)" }}
+              style={{ marginBottom: "1.4cqh", color: "var(--ivory)" }}
             >
               {renderMultiline(content.right.headline)}
             </h3>
@@ -513,7 +513,7 @@ function Market({ content }: { content: MarketContent }) {
 // ─── S10 · ROADMAP ────────────────────────────────────────────────────────
 function Roadmap({ content }: { content: RoadmapContent }) {
   return (
-    <div className="body" style={{ gap: "2.4vh" }}>
+    <div className="body" style={{ gap: "2.4cqh" }}>
       <div>
         <p className="label">{content.label}</p>
         <div className="rule" />
@@ -523,7 +523,7 @@ function Roadmap({ content }: { content: RoadmapContent }) {
           <span className="gold">{content.headline_accent}</span>
         </h2>
       </div>
-      <div className="g3" style={{ gap: "2.8vw", marginBottom: ".5vh" }}>
+      <div className="g3" style={{ gap: "2.8cqw", marginBottom: ".5cqh" }}>
         {content.phases.map((p, i) => (
           <div className="phase" key={i}>
             <div className="ph-l">{p.label}</div>
@@ -535,8 +535,8 @@ function Roadmap({ content }: { content: RoadmapContent }) {
       <div
         style={{
           borderTop: "2px solid var(--gold)",
-          paddingTop: "2.2vh",
-          marginTop: "2vh",
+          paddingTop: "2.2cqh",
+          marginTop: "2cqh",
         }}
       >
         <div
@@ -567,7 +567,7 @@ function Roadmap({ content }: { content: RoadmapContent }) {
           style={{
             fontFamily: "var(--serif)",
             fontWeight: 300,
-            fontSize: "clamp(1rem,1.65vw,1.55rem)",
+            fontSize: "clamp(1rem,1.65cqw,1.55rem)",
             lineHeight: 1.72,
             color: "var(--ivory)",
             maxWidth: "88%",
@@ -585,7 +585,7 @@ function Team({ content }: { content: TeamContent }) {
   return (
     <div
       className="body"
-      style={{ justifyContent: "flex-start", gap: ".8vh", paddingTop: "3vh" }}
+      style={{ justifyContent: "flex-start", gap: ".8cqh", paddingTop: "3cqh" }}
     >
       <div>
         <p className="label">{content.label}</p>
@@ -655,9 +655,9 @@ function Team({ content }: { content: TeamContent }) {
           borderTop: "1px solid var(--gold-line)",
           paddingTop: ".85rem",
           display: "flex",
-          gap: "4vw",
+          gap: "4cqw",
           flexShrink: 0,
-          marginTop: "1vh",
+          marginTop: "1cqh",
         }}
       >
         {content.partners.map((p, i) => (
@@ -688,13 +688,13 @@ function Close({ content }: { content: CloseContent }) {
       <div
         style={{
           flex: 1,
-          padding: "4vh 4vw 4vh 0",
+          padding: "4cqh 4cqw 4cqh 0",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "2.5vh",
+          gap: "2.5cqh",
           borderRight: "1px solid var(--gold-line)",
-          paddingRight: "5vw",
+          paddingRight: "5cqw",
         }}
       >
         <div>
@@ -704,7 +704,7 @@ function Close({ content }: { content: CloseContent }) {
         <p
           className="serif"
           style={{
-            fontSize: "clamp(1.5rem,2.8vw,2.8rem)",
+            fontSize: "clamp(1.5rem,2.8cqw,2.8rem)",
             lineHeight: 1.2,
             color: "var(--ivory)",
           }}
@@ -777,11 +777,11 @@ function Close({ content }: { content: CloseContent }) {
         style={{
           width: "38%",
           flexShrink: 0,
-          padding: "4vh 0 4vh 5vw",
+          padding: "4cqh 0 4cqh 5cqw",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "3vh",
+          gap: "3cqh",
         }}
       >
         <div>
@@ -791,7 +791,7 @@ function Close({ content }: { content: CloseContent }) {
         <p
           className="serif"
           style={{
-            fontSize: "clamp(1.1rem,1.8vw,1.7rem)",
+            fontSize: "clamp(1.1rem,1.8cqw,1.7rem)",
             lineHeight: 1.4,
             color: "var(--ivory)",
           }}
@@ -809,7 +809,7 @@ function Close({ content }: { content: CloseContent }) {
           <p
             style={{
               fontFamily: "var(--serif)",
-              fontSize: "clamp(1rem,1.5vw,1.4rem)",
+              fontSize: "clamp(1rem,1.5cqw,1.4rem)",
               fontWeight: 300,
               color: "var(--gold)",
               lineHeight: 1.4,

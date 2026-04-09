@@ -64,8 +64,16 @@ export default function Deck({ bundle }: { bundle: DeckBundle }) {
   }, [current, go]);
 
   return (
-    <div className="deck-root">
-      {slides.map((slide, i) => (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
+      <div className="deck-root">
+        {slides.map((slide, i) => (
         <section
           key={slide.id}
           className={`slide${i === current ? " active" : ""}`}
@@ -104,6 +112,7 @@ export default function Deck({ bundle }: { bundle: DeckBundle }) {
         <button className="ab" onClick={() => go(current + 1)}>
           Next →
         </button>
+      </div>
       </div>
     </div>
   );
