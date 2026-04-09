@@ -5,7 +5,7 @@
 // Reads only published decks (RLS enforces this even with the anon key).
 // ═══════════════════════════════════════════════════════════════════════
 
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type {
   Audience,
   Deck,
@@ -14,7 +14,7 @@ import type {
   Theme,
 } from "./types";
 
-function serverClient() {
+function publicServerClient() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -22,8 +22,11 @@ function serverClient() {
   );
 }
 
-export async function getDeckBySlug(slug: string): Promise<DeckBundle | null> {
-  const supabase = serverClient();
+// Internal helper — works with any client (anon for public, ssr for studio)
+async function fetchDeckBundle(
+  supabase: SupabaseClient,
+  slug: string
+): Promise<DeckBundle | null> {
 
   // 1. fetch the deck (RLS lets through only published)
   const { data: deck, error: deckErr } = await supabase
@@ -68,4 +71,17 @@ export async function getDeckBySlug(slug: string): Promise<DeckBundle | null> {
     audience: (audienceRes.data ?? null) as Audience | null,
     slides: (slidesRes.data ?? []) as SlideRecord[],
   };
+}
+
+// Public-facing fetch — only published decks via RLS
+export async function getDeckBySlug(slug: string): Promise<DeckBundle | null> {
+  return fetchDeckBundle(publicServerClient(), slug);
+}
+
+// Studio fetch — pass an authenticated client to see drafts too
+export async function getDeckBySlugAuthed(
+  supabase: SupabaseClient,
+  slug: string
+): Promise<DeckBundle | null> {
+  return fetchDeckBundle(supabase, slug);
 }
