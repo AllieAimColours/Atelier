@@ -6,7 +6,9 @@
 // ═══════════════════════════════════════════════════════════════════════
 
 export function getAllowedEmails(): string[] {
-  const raw = process.env.STUDIO_ALLOWED_EMAILS ?? "allie@aimcolours.com";
+  const raw =
+    process.env.STUDIO_ALLOWED_EMAILS ??
+    "allie@aimcolours.com,contact@aimcolours.com";
   return raw
     .split(",")
     .map((s) => s.trim().toLowerCase())
