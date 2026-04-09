@@ -55,20 +55,48 @@ export default function Home() {
         </p>
 
         <div
-          className="fade-up delay-3 mt-12 flex flex-col items-center gap-4"
-          style={{ minHeight: "3rem" }}
+          className="fade-up delay-3 mt-12 flex flex-col sm:flex-row items-center gap-4"
         >
-          <div
-            className="border border-[color:var(--gold-line)] px-6 py-2"
-            style={{ display: "inline-block" }}
+          <a
+            href="/pitch/default"
+            className="border border-[color:var(--gold)] px-8 py-3 transition-colors hover:bg-[color:var(--gold)]"
+            style={{
+              display: "inline-block",
+              textDecoration: "none",
+              color: "var(--ivory)",
+            }}
           >
-            <p
-              className="font-sans uppercase text-gold-dim"
-              style={{ fontSize: "0.7rem", letterSpacing: "0.28em", fontWeight: 200 }}
+            <span
+              className="font-sans uppercase"
+              style={{
+                fontSize: "0.7rem",
+                letterSpacing: "0.28em",
+                fontWeight: 300,
+              }}
             >
-              Phase I · Foundation
-            </p>
-          </div>
+              View the deck →
+            </span>
+          </a>
+          <a
+            href="/studio"
+            className="border border-[color:var(--gold-line)] px-8 py-3 transition-colors hover:border-[color:var(--gold)]"
+            style={{
+              display: "inline-block",
+              textDecoration: "none",
+              color: "var(--gold-dim)",
+            }}
+          >
+            <span
+              className="font-sans uppercase"
+              style={{
+                fontSize: "0.7rem",
+                letterSpacing: "0.28em",
+                fontWeight: 300,
+              }}
+            >
+              Enter the Atelier
+            </span>
+          </a>
         </div>
       </section>
 
