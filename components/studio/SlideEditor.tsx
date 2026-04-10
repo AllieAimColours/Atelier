@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type {
-  CoverContent,
-  SlideContent,
-  SlideRecord,
-} from "@/lib/types";
+import type { SlideContent, SlideRecord } from "@/lib/types";
+import TypedEditor from "./editors";
 
 type Status =
   | { kind: "idle" }
@@ -22,12 +19,14 @@ export default function SlideEditor({
 }) {
   const [draft, setDraft] = useState<SlideContent>(slide.content);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const [showRaw, setShowRaw] = useState(false);
   const dirty = JSON.stringify(draft) !== JSON.stringify(slide.content);
 
   // Reset draft when switching slides
   useEffect(() => {
     setDraft(slide.content);
     setStatus({ kind: "idle" });
+    setShowRaw(false);
   }, [slide.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function save() {
@@ -64,14 +63,19 @@ export default function SlideEditor({
       </div>
 
       <div className="studio__edit-body">
-        {slide.type === "cover" ? (
-          <CoverFields
-            value={draft as CoverContent}
-            onChange={(next) => setDraft(next)}
-          />
-        ) : (
+        {showRaw ? (
           <RawJsonField value={draft} onChange={setDraft} type={slide.type} />
+        ) : (
+          <TypedEditor slide={slide} draft={draft} onChange={setDraft} />
         )}
+        <button
+          type="button"
+          className="studio__btn studio__btn--ghost"
+          style={{ marginTop: "1rem", alignSelf: "flex-start" }}
+          onClick={() => setShowRaw((s) => !s)}
+        >
+          {showRaw ? "← Form view" : "Raw JSON →"}
+        </button>
       </div>
 
       <div className="studio__edit-foot">
@@ -104,65 +108,7 @@ export default function SlideEditor({
   );
 }
 
-// ─── Cover editor (proof of concept for typed editing) ───────────────────
-function CoverFields({
-  value,
-  onChange,
-}: {
-  value: CoverContent;
-  onChange: (next: CoverContent) => void;
-}) {
-  return (
-    <>
-      <div className="studio__field">
-        <label className="studio__field-label">Title (top)</label>
-        <input
-          className="studio__input"
-          value={value.title_top}
-          onChange={(e) => onChange({ ...value, title_top: e.target.value })}
-        />
-      </div>
-      <div className="studio__field">
-        <label className="studio__field-label">Title (bottom)</label>
-        <input
-          className="studio__input"
-          value={value.title_bottom}
-          onChange={(e) => onChange({ ...value, title_bottom: e.target.value })}
-        />
-      </div>
-      <div className="studio__field">
-        <label className="studio__field-label">Patent / Header right</label>
-        <input
-          className="studio__input"
-          value={value.patent}
-          onChange={(e) => onChange({ ...value, patent: e.target.value })}
-        />
-      </div>
-      <div className="studio__field">
-        <label className="studio__field-label">Footer left</label>
-        <textarea
-          className="studio__textarea"
-          rows={2}
-          value={value.footer_left}
-          onChange={(e) => onChange({ ...value, footer_left: e.target.value })}
-        />
-      </div>
-      <div className="studio__field">
-        <label className="studio__field-label">Footer right</label>
-        <textarea
-          className="studio__textarea"
-          rows={2}
-          value={value.footer_right}
-          onChange={(e) =>
-            onChange({ ...value, footer_right: e.target.value })
-          }
-        />
-      </div>
-    </>
-  );
-}
-
-// ─── Raw JSON fallback (for slide types we haven't built typed editors for yet) ───
+// ─── Raw JSON power-user fallback ────────────────────────────────────────
 function RawJsonField({
   value,
   onChange,
