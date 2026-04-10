@@ -2,6 +2,7 @@
 
 import type { SlideRecord } from "@/lib/types";
 import SlideRenderer from "@/components/deck/SlideRenderer";
+import SlideErrorBoundary from "@/components/deck/SlideErrorBoundary";
 import VideoLightbox from "@/components/deck/VideoLightbox";
 import "@/components/deck/deck.css";
 
@@ -20,7 +21,12 @@ export default function SlidePreview({ slide }: { slide: SlideRecord }) {
                 : `${toRoman(slide.position)} · XII`}
             </span>
           </header>
-          <SlideRenderer slide={slide} />
+          <SlideErrorBoundary
+            slideNumber={slide.position}
+            slideType={slide.type}
+          >
+            <SlideRenderer slide={slide} />
+          </SlideErrorBoundary>
         </section>
       </div>
       <VideoLightbox />

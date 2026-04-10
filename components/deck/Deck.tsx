@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { DeckBundle } from "@/lib/types";
 import SlideRenderer from "./SlideRenderer";
+import SlideErrorBoundary from "./SlideErrorBoundary";
 import VideoLightbox from "./VideoLightbox";
 import "./deck.css";
 
@@ -89,7 +90,12 @@ export default function Deck({ bundle }: { bundle: DeckBundle }) {
                 : `${toRoman(slide.position)} · ${toRoman(total)}`}
             </span>
           </header>
-          <SlideRenderer slide={slide} />
+          <SlideErrorBoundary
+            slideNumber={slide.position}
+            slideType={slide.type}
+          >
+            <SlideRenderer slide={slide} />
+          </SlideErrorBoundary>
         </section>
       ))}
 
