@@ -123,7 +123,7 @@ function Problem({ content }: { content: ProblemContent }) {
       <div className="rule-full" />
 
       <div className="g2" style={{ gap: "5cqw", alignItems: "end" }}>
-        {content.two_columns.map((col, i) => (
+        {(content.two_columns ?? []).map((col, i) => (
           <div key={i}>
             <p className="label" style={{ marginBottom: ".7rem" }}>
               {col.title}
@@ -223,7 +223,7 @@ function Vision({ content }: { content: VisionContent }) {
           flex: 1,
         }}
       >
-        {content.three_columns.map((col, i) => (
+        {(content.three_columns ?? []).map((col, i) => (
           <div
             key={i}
             style={{
@@ -274,7 +274,7 @@ function Technology({ content }: { content: TechnologyContent }) {
           paddingTop: "1cqh",
         }}
       >
-        {content.specs.map((spec, i) => (
+        {(content.specs ?? []).map((spec, i) => (
           <div className="spec" key={i}>
             <div className="spec-v">{spec.value}</div>
             <div className="spec-l">{spec.label}</div>
@@ -321,7 +321,7 @@ function Experience({ content }: { content: ExperienceContent }) {
         </h2>
       </div>
       <div className="g3" style={{ alignItems: "start", gap: "3cqw" }}>
-        {content.numbered_columns.map((col, i) => (
+        {(content.numbered_columns ?? []).map((col, i) => (
           <div
             key={i}
             style={{
@@ -372,7 +372,7 @@ function Revenue({ content }: { content: RevenueContent }) {
         </h2>
       </div>
       <div className="g4">
-        {content.pillars.map((p, i) => (
+        {(content.pillars ?? []).map((p, i) => (
           <div className="pillar" key={i}>
             <div className="p-num">{p.number}</div>
             <div className="p-title">{p.title}</div>
@@ -399,7 +399,7 @@ function Gtm({ content }: { content: GtmContent }) {
         </h2>
       </div>
       <div className="g4" style={{ gap: "2cqw" }}>
-        {content.years.map((y, i) => (
+        {(content.years ?? []).map((y, i) => (
           <div
             key={i}
             className="yr"
@@ -464,13 +464,13 @@ function Market({ content }: { content: MarketContent }) {
             <p className="label">{content.label}</p>
             <div className="rule" />
           </div>
-          {content.metrics.map((m, i) => (
+          {(content.metrics ?? []).map((m, i) => (
             <div key={i}>
               <div className="mkt-v">{m.value}</div>
               <div className="mkt-l">
                 {m.label} — {m.desc}
               </div>
-              {i < content.metrics.length - 1 && (
+              {i < (content.metrics ?? []).length - 1 && (
                 <div className="rule-full" style={{ marginTop: "1.2rem" }} />
               )}
             </div>
@@ -508,7 +508,7 @@ function Market({ content }: { content: MarketContent }) {
           <div
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
-            {content.right.moat.map((m, i) => (
+            {(content.right.moat ?? []).map((m, i) => (
               <div className="spec" key={i}>
                 <div
                   style={{
@@ -544,7 +544,7 @@ function Roadmap({ content }: { content: RoadmapContent }) {
         </h2>
       </div>
       <div className="g3" style={{ gap: "2.8cqw", marginBottom: ".5cqh" }}>
-        {content.phases.map((p, i) => (
+        {(content.phases ?? []).map((p, i) => (
           <div className="phase" key={i}>
             <div className="ph-l">{p.label}</div>
             <div className="ph-t">{p.title}</div>
@@ -612,7 +612,7 @@ function Team({ content }: { content: TeamContent }) {
         <div className="rule" style={{ marginBottom: ".8rem" }} />
       </div>
       <div className="tg">
-        {content.members.map((m, i) => (
+        {(content.members ?? []).map((m, i) => (
           <div
             key={i}
             className="member"
@@ -680,7 +680,7 @@ function Team({ content }: { content: TeamContent }) {
           marginTop: "1cqh",
         }}
       >
-        {content.partners.map((p, i) => (
+        {(content.partners ?? []).map((p, i) => (
           <div key={i}>
             <p className="label" style={{ marginBottom: ".25rem" }}>
               {p.label}
@@ -729,7 +729,7 @@ function Close({ content }: { content: CloseContent }) {
             color: "var(--ivory)",
           }}
         >
-          {content.left.statement_lines.map((line, i, arr) => (
+          {(content.left.statement_lines ?? []).map((line, i, arr) => (
             <span key={i}>
               {line}
               {i < arr.length - 1 && <br />}
@@ -738,7 +738,7 @@ function Close({ content }: { content: CloseContent }) {
           <br />
           <br />
           <span className="gold">
-            {content.left.statement_accent_lines.map((line, i, arr) => (
+            {(content.left.statement_accent_lines ?? []).map((line, i, arr) => (
               <span key={i}>
                 {line}
                 {i < arr.length - 1 && <br />}
@@ -748,7 +748,7 @@ function Close({ content }: { content: CloseContent }) {
         </p>
         <div className="rule-full" />
         <div style={{ display: "flex", flexDirection: "column", gap: ".75rem" }}>
-          {content.left.links.map((link, i) => {
+          {(content.left.links ?? []).map((link, i) => {
             if (link.type === "email") {
               return (
                 <a
@@ -834,7 +834,7 @@ function Close({ content }: { content: CloseContent }) {
         <div
           style={{ display: "flex", flexDirection: "column", gap: ".85rem" }}
         >
-          {content.right.use_of_funds.map((row, i) => (
+          {(content.right.use_of_funds ?? []).map((row, i) => (
             <div
               key={i}
               style={{
@@ -888,7 +888,7 @@ function Close({ content }: { content: CloseContent }) {
               lineHeight: 1.4,
             }}
           >
-            {content.right.footer_lines.map((line, i, arr) => (
+            {(content.right.footer_lines ?? []).map((line, i, arr) => (
               <span key={i}>
                 {line}
                 {i < arr.length - 1 && <br />}
