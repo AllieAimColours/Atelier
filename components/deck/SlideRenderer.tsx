@@ -177,42 +177,48 @@ function Vision({ content }: { content: VisionContent }) {
         </h2>
       </div>
 
-      <div
-        style={{
-          width: "100%",
-          background: content.image.background,
-          flexShrink: 0,
-          height: "34cqh",
-          overflow: "hidden",
-          borderRadius: "3px",
-          position: "relative",
-        }}
-      >
-        <img
-          src={content.image.src}
-          alt={content.image.alt}
+      {content.image && (
+        <div
           style={{
             width: "100%",
-            height: "100%",
-            objectFit: "contain",
-            objectPosition: "center center",
+            background: content.image.background ?? "#ede7db",
+            flexShrink: 0,
+            height: "34cqh",
+            overflow: "hidden",
+            borderRadius: "3px",
+            position: "relative",
           }}
-        />
-        <div style={{ position: "absolute", bottom: ".6rem", right: "1rem" }}>
-          <p
-            style={{
-              fontFamily: "var(--sans)",
-              fontWeight: 200,
-              fontSize: ".52rem",
-              letterSpacing: ".28em",
-              textTransform: "uppercase",
-              color: "rgba(45,31,20,.72)",
-            }}
-          >
-            {content.image.caption}
-          </p>
+        >
+          {content.image.src && (
+            <img
+              src={content.image.src}
+              alt={content.image.alt ?? ""}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                objectPosition: "center center",
+              }}
+            />
+          )}
+          {content.image.caption && (
+            <div style={{ position: "absolute", bottom: ".6rem", right: "1rem" }}>
+              <p
+                style={{
+                  fontFamily: "var(--sans)",
+                  fontWeight: 200,
+                  fontSize: ".52rem",
+                  letterSpacing: ".28em",
+                  textTransform: "uppercase",
+                  color: "rgba(45,31,20,.72)",
+                }}
+              >
+                {content.image.caption}
+              </p>
+            </div>
+          )}
         </div>
-      </div>
+      )}
 
       <div
         style={{
