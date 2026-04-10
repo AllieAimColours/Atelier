@@ -68,15 +68,35 @@ function renderMultiline(text: string) {
 
 // ─── S1 · COVER ───────────────────────────────────────────────────────────
 function Cover({ content }: { content: CoverContent }) {
+  function openVideo() {
+    if (typeof window === "undefined" || !content.demo_video_url) return;
+    window.dispatchEvent(
+      new CustomEvent("atelier:open-video", { detail: content.demo_video_url })
+    );
+  }
+
   return (
     <>
       <div className="cover-glow" />
-      <div className="body" style={{ justifyContent: "center" }}>
+      <div
+        className="body"
+        style={{ justifyContent: "center", gap: "3cqh" }}
+      >
         <h1 className="cover-title">
           <span className="ivory">{content.title_top}</span>
           <br />
           <span className="gold">{content.title_bottom}</span>
         </h1>
+        {content.demo_cta_label && content.demo_video_url && (
+          <button
+            type="button"
+            onClick={openVideo}
+            className="cta"
+            style={{ alignSelf: "center" }}
+          >
+            {content.demo_cta_label}
+          </button>
+        )}
       </div>
       <div className="cover-foot">
         <p className="cover-left">{renderMultiline(content.footer_left)}</p>
@@ -775,43 +795,96 @@ function Close({ content }: { content: CloseContent }) {
 
       <div
         style={{
-          width: "38%",
+          width: "42%",
           flexShrink: 0,
-          padding: "4cqh 0 4cqh 5cqw",
+          padding: "4cqh 0 4cqh 4cqw",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "3cqh",
+          gap: "2.4cqh",
         }}
       >
         <div>
           <p className="label">{content.right.label}</p>
           <div className="rule" />
         </div>
-        <p
-          className="serif"
-          style={{
-            fontSize: "clamp(1.1rem,1.8cqw,1.7rem)",
-            lineHeight: 1.4,
-            color: "var(--ivory)",
-          }}
+
+        <div>
+          <p
+            style={{
+              fontFamily: "var(--serif)",
+              fontSize: "clamp(2.4rem,4.2cqw,4.4rem)",
+              lineHeight: 1,
+              color: "var(--gold)",
+              fontWeight: 400,
+            }}
+          >
+            {content.right.amount}
+          </p>
+          <p
+            className="label"
+            style={{ marginTop: ".6rem", color: "var(--ivory-dim)" }}
+          >
+            {content.right.raise_meta}
+          </p>
+        </div>
+
+        <div className="rule-full" />
+
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: ".85rem" }}
         >
-          {content.right.headline}
-        </p>
-        <p className="body-s">{content.right.body}</p>
+          {content.right.use_of_funds.map((row, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
+                gap: "1rem",
+              }}
+            >
+              <span className="body-s" style={{ color: "var(--ivory)" }}>
+                {row.label}
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--serif)",
+                  fontSize: "clamp(.9rem,1.1cqw,1.05rem)",
+                  color: "var(--gold)",
+                  fontStyle: "italic",
+                }}
+              >
+                {row.pct}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="rule-full" />
+
+        <div>
+          <p className="label" style={{ marginBottom: ".5rem" }}>
+            {content.right.unlocks_label}
+          </p>
+          <p className="body-s" style={{ lineHeight: 1.7 }}>
+            {content.right.unlocks_body}
+          </p>
+        </div>
+
         <div
           style={{
             marginTop: "auto",
             borderTop: "1px solid var(--gold-line)",
-            paddingTop: "1.4rem",
+            paddingTop: "1.2rem",
           }}
         >
           <p
             style={{
               fontFamily: "var(--serif)",
-              fontSize: "clamp(1rem,1.5cqw,1.4rem)",
-              fontWeight: 300,
-              color: "var(--gold)",
+              fontStyle: "italic",
+              fontSize: "clamp(.95rem,1.2cqw,1.15rem)",
+              color: "var(--gold-dim)",
               lineHeight: 1.4,
             }}
           >

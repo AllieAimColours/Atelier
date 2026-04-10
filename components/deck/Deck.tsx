@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { DeckBundle } from "@/lib/types";
 import SlideRenderer from "./SlideRenderer";
+import VideoLightbox from "./VideoLightbox";
 import "./deck.css";
 
 export default function Deck({ bundle }: { bundle: DeckBundle }) {
@@ -114,6 +115,7 @@ export default function Deck({ bundle }: { bundle: DeckBundle }) {
         </button>
       </div>
       </div>
+      <VideoLightbox />
     </div>
   );
 }

@@ -81,6 +81,11 @@ export type CoverContent = {
   patent: string;
   footer_left: string;
   footer_right: string;
+  // Optional video CTA (added in tonight's sync). When present, the cover
+  // shows a "Watch the demo" button below the title that opens a fullscreen
+  // video lightbox over the deck.
+  demo_cta_label?: string;
+  demo_video_url?: string;
 };
 
 export type ProblemContent = {
@@ -184,8 +189,11 @@ export type CloseContent = {
   };
   right: {
     label: string;
-    headline: string;
-    body: string;
+    amount: string;          // e.g. "$1.3M"
+    raise_meta: string;      // e.g. "Pre-Seed · 18-month runway"
+    use_of_funds: { label: string; pct: string }[];
+    unlocks_label: string;   // e.g. "What this unlocks"
+    unlocks_body: string;    // milestones sentence
     footer_lines: string[];
   };
 };
