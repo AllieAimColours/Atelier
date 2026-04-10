@@ -46,8 +46,8 @@ export default function SlideRenderer({ slide }: { slide: SlideRecord }) {
 }
 
 // ─── helpers ──────────────────────────────────────────────────────────────
-function renderInline(text: string) {
-  // Convert **bold** to <strong>
+function renderInline(text: string | undefined | null) {
+  if (!text) return null;
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
@@ -57,7 +57,8 @@ function renderInline(text: string) {
   });
 }
 
-function renderMultiline(text: string) {
+function renderMultiline(text: string | undefined | null) {
+  if (!text) return null;
   return text.split("\n").map((line, i, arr) => (
     <span key={i}>
       {renderInline(line)}
@@ -181,7 +182,7 @@ function Vision({ content }: { content: VisionContent }) {
         <div
           style={{
             width: "100%",
-            background: content.image.background ?? "#ede7db",
+            background: content.image?.background ?? "#ede7db",
             flexShrink: 0,
             height: "34cqh",
             overflow: "hidden",
@@ -189,10 +190,10 @@ function Vision({ content }: { content: VisionContent }) {
             position: "relative",
           }}
         >
-          {content.image.src && (
+          {content.image?.src && (
             <img
-              src={content.image.src}
-              alt={content.image.alt ?? ""}
+              src={content.image?.src}
+              alt={content.image?.alt ?? ""}
               style={{
                 width: "100%",
                 height: "100%",
@@ -201,7 +202,7 @@ function Vision({ content }: { content: VisionContent }) {
               }}
             />
           )}
-          {content.image.caption && (
+          {content.image?.caption && (
             <div style={{ position: "absolute", bottom: ".6rem", right: "1rem" }}>
               <p
                 style={{
@@ -213,7 +214,7 @@ function Vision({ content }: { content: VisionContent }) {
                   color: "rgba(45,31,20,.72)",
                 }}
               >
-                {content.image.caption}
+                {content.image?.caption}
               </p>
             </div>
           )}
@@ -440,7 +441,7 @@ function Traction({ content }: { content: TractionContent }) {
       >
         {content.big_statement_lead}
         <br />
-        to a <span className="gold em">{content.big_statement_accent.replace(/^to a /, "")}</span>
+        to a <span className="gold em">{(content.big_statement_accent ?? "").replace(/^to a /, "")}</span>
       </p>
       <div className="rule-full" />
       <p className="body-s" style={{ maxWidth: "58%" }}>
@@ -482,12 +483,12 @@ function Market({ content }: { content: MarketContent }) {
             </div>
           ))}
           <div className="mkt-statement" style={{ marginTop: "auto" }}>
-            {content.statement.lead}
+            {content.statement?.lead}
             <br />
-            {content.statement.mid}
+            {content.statement?.mid}
             <br />
             <span style={{ color: "var(--ivory)" }}>
-              {content.statement.accent}
+              {content.statement?.accent}
             </span>
           </div>
         </div>
@@ -502,19 +503,19 @@ function Market({ content }: { content: MarketContent }) {
           }}
         >
           <div>
-            <p className="label">{content.right.label}</p>
+            <p className="label">{content.right?.label}</p>
             <div className="rule" />
             <h3
               className="serif d-sm"
               style={{ marginBottom: "1.4cqh", color: "var(--ivory)" }}
             >
-              {renderMultiline(content.right.headline)}
+              {renderMultiline(content.right?.headline)}
             </h3>
           </div>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
-            {(content.right.moat ?? []).map((m, i) => (
+            {(content.right?.moat ?? []).map((m, i) => (
               <div className="spec" key={i}>
                 <div
                   style={{
@@ -574,7 +575,7 @@ function Roadmap({ content }: { content: RoadmapContent }) {
           }}
         >
           <p className="label" style={{ letterSpacing: ".5em" }}>
-            {content.beyond.label}
+            {content.beyond?.label}
           </p>
           <p
             style={{
@@ -586,7 +587,7 @@ function Roadmap({ content }: { content: RoadmapContent }) {
               color: "var(--ivory-dim)",
             }}
           >
-            {content.beyond.phase}
+            {content.beyond?.phase}
           </p>
         </div>
         <p
@@ -599,7 +600,7 @@ function Roadmap({ content }: { content: RoadmapContent }) {
             maxWidth: "88%",
           }}
         >
-          {content.beyond.body}
+          {content.beyond?.body}
         </p>
       </div>
     </div>
@@ -724,7 +725,7 @@ function Close({ content }: { content: CloseContent }) {
         }}
       >
         <div>
-          <p className="label">{content.left.label}</p>
+          <p className="label">{content.left?.label}</p>
           <div className="rule" />
         </div>
         <p
@@ -735,7 +736,7 @@ function Close({ content }: { content: CloseContent }) {
             color: "var(--ivory)",
           }}
         >
-          {(content.left.statement_lines ?? []).map((line, i, arr) => (
+          {(content.left?.statement_lines ?? []).map((line, i, arr) => (
             <span key={i}>
               {line}
               {i < arr.length - 1 && <br />}
@@ -744,7 +745,7 @@ function Close({ content }: { content: CloseContent }) {
           <br />
           <br />
           <span className="gold">
-            {(content.left.statement_accent_lines ?? []).map((line, i, arr) => (
+            {(content.left?.statement_accent_lines ?? []).map((line, i, arr) => (
               <span key={i}>
                 {line}
                 {i < arr.length - 1 && <br />}
@@ -754,7 +755,7 @@ function Close({ content }: { content: CloseContent }) {
         </p>
         <div className="rule-full" />
         <div style={{ display: "flex", flexDirection: "column", gap: ".75rem" }}>
-          {(content.left.links ?? []).map((link, i) => {
+          {(content.left?.links ?? []).map((link, i) => {
             if (link.type === "email") {
               return (
                 <a
@@ -811,7 +812,7 @@ function Close({ content }: { content: CloseContent }) {
         }}
       >
         <div>
-          <p className="label">{content.right.label}</p>
+          <p className="label">{content.right?.label}</p>
           <div className="rule" />
         </div>
 
@@ -825,13 +826,13 @@ function Close({ content }: { content: CloseContent }) {
               fontWeight: 400,
             }}
           >
-            {content.right.amount}
+            {content.right?.amount}
           </p>
           <p
             className="label"
             style={{ marginTop: ".6rem", color: "var(--ivory-dim)" }}
           >
-            {content.right.raise_meta}
+            {content.right?.raise_meta}
           </p>
         </div>
 
@@ -840,7 +841,7 @@ function Close({ content }: { content: CloseContent }) {
         <div
           style={{ display: "flex", flexDirection: "column", gap: ".85rem" }}
         >
-          {(content.right.use_of_funds ?? []).map((row, i) => (
+          {(content.right?.use_of_funds ?? []).map((row, i) => (
             <div
               key={i}
               style={{
@@ -871,10 +872,10 @@ function Close({ content }: { content: CloseContent }) {
 
         <div>
           <p className="label" style={{ marginBottom: ".5rem" }}>
-            {content.right.unlocks_label}
+            {content.right?.unlocks_label}
           </p>
           <p className="body-s" style={{ lineHeight: 1.7 }}>
-            {content.right.unlocks_body}
+            {content.right?.unlocks_body}
           </p>
         </div>
 
@@ -894,7 +895,7 @@ function Close({ content }: { content: CloseContent }) {
               lineHeight: 1.4,
             }}
           >
-            {(content.right.footer_lines ?? []).map((line, i, arr) => (
+            {(content.right?.footer_lines ?? []).map((line, i, arr) => (
               <span key={i}>
                 {line}
                 {i < arr.length - 1 && <br />}
