@@ -140,9 +140,10 @@ function RawJsonField({
 
   return (
     <>
-      <div className="studio__stub">
-        Typed editor for <strong style={{ color: "var(--gold)" }}>{type}</strong>{" "}
-        coming soon. For now, edit the JSON directly.
+      <div className="studio__stub" style={{ padding: "1rem 0" }}>
+        Raw JSON editor for{" "}
+        <strong style={{ color: "var(--gold)" }}>{type}</strong>. For surgical
+        edits. The form view has all the typed fields if you prefer that.
       </div>
       <div className="studio__field">
         <label className="studio__field-label">Slide content (JSON)</label>
