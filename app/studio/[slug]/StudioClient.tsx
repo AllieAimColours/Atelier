@@ -7,6 +7,7 @@ import { createBrowserSupabase } from "@/lib/supabase-browser";
 import SlidePreview from "@/components/studio/SlidePreview";
 import SlideEditor from "@/components/studio/SlideEditor";
 import ChatPanel from "@/components/studio/ChatPanel";
+import PanelErrorBoundary from "@/components/studio/PanelErrorBoundary";
 import "../studio.css";
 
 type Mode = "edit" | "chat";
@@ -467,10 +468,14 @@ export default function StudioClient({
             </button>
           </div>
           {current && mode === "edit" && (
-            <SlideEditor slide={current} onUpdated={onSlideUpdated} />
+            <PanelErrorBoundary key={`edit-${current.id}`} paneName="Editor">
+              <SlideEditor slide={current} onUpdated={onSlideUpdated} />
+            </PanelErrorBoundary>
           )}
           {current && mode === "chat" && (
-            <ChatPanel slide={current} onUpdated={onSlideUpdated} />
+            <PanelErrorBoundary key={`chat-${current.id}`} paneName="Co-pilot">
+              <ChatPanel slide={current} onUpdated={onSlideUpdated} />
+            </PanelErrorBoundary>
           )}
         </aside>
       </div>

@@ -67,34 +67,37 @@ export function Repeater<T>({
   itemTitle,
 }: {
   label: string;
-  items: T[];
+  items: T[] | undefined | null;
   onChange: (next: T[]) => void;
   newItem: () => T;
   renderItem: (item: T, update: (next: T) => void, index: number) => ReactNode;
   itemTitle?: (item: T, index: number) => string;
 }) {
+  // Null-safe: if items is undefined, treat it as an empty array
+  const safeItems: T[] = Array.isArray(items) ? items : [];
+
   function update(idx: number, next: T) {
-    onChange(items.map((it, i) => (i === idx ? next : it)));
+    onChange(safeItems.map((it, i) => (i === idx ? next : it)));
   }
   function remove(idx: number) {
-    onChange(items.filter((_, i) => i !== idx));
+    onChange(safeItems.filter((_, i) => i !== idx));
   }
   function move(idx: number, dir: -1 | 1) {
     const target = idx + dir;
-    if (target < 0 || target >= items.length) return;
-    const copy = [...items];
+    if (target < 0 || target >= safeItems.length) return;
+    const copy = [...safeItems];
     [copy[idx], copy[target]] = [copy[target], copy[idx]];
     onChange(copy);
   }
   function add() {
-    onChange([...items, newItem()]);
+    onChange([...safeItems, newItem()]);
   }
 
   return (
     <div className="studio__field">
       <label className="studio__field-label">{label}</label>
       <div className="repeater">
-        {items.map((item, i) => (
+        {safeItems.map((item, i) => (
           <div key={i} className="repeater__item">
             <div className="repeater__head">
               <span className="repeater__index">
@@ -114,7 +117,7 @@ export function Repeater<T>({
                   type="button"
                   className="repeater__btn"
                   onClick={() => move(i, 1)}
-                  disabled={i === items.length - 1}
+                  disabled={i === safeItems.length - 1}
                   title="Move down"
                 >
                   ↓
@@ -150,7 +153,7 @@ export function LinesField({
   rows = 4,
 }: {
   label: string;
-  value: string[];
+  value: string[] | undefined | null;
   onChange: (next: string[]) => void;
   rows?: number;
 }) {
